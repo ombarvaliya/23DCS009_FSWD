@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tax Form - Income Entry</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Enter Your Income</h1>
+
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+
+    <form action="/calculate" method="POST" novalidate>
+      <label for="income1">Income Source 1</label>
+      <input
+        id="income1"
+        name="income1"
+        type="text"
+        inputmode="decimal"
+        placeholder="e.g. 1234.56"
+        value="<%= values.income1 %>"
+        autocomplete="off"
+        required
+      />
+
+      <label for="income2">Income Source 2</label>
+      <input
+        id="income2"
+        name="income2"
+        type="text"
+        inputmode="decimal"
+        placeholder="e.g. 500"
+        value="<%= values.income2 %>"
+        autocomplete="off"
+        required
+      />
+
+      <button type="submit">Calculate Total Income</button>
+    </form>
+  </div>
+</body>
+</html>

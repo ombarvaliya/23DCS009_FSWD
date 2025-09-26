@@ -1,0 +1,63 @@
+.app-container {
+  display: flex;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  font-size: 24px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle-btn:hover {
+  background-color: #c0392b;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #d8c8e3;
+  padding: 40px 20px 20px 20px;
+  transition: transform 0.3s ease;
+}
+
+.sidebar.closed {
+  transform: translateX(-220px);
+}
+
+.sidebar button {
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #e6e6fa;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.sidebar button:hover {
+  background-color: #d1d1f0;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 60px 40px;
+  transition: margin-left 0.3s ease;
+}
+
+.content.closed {
+  margin-left: 40px;
+}

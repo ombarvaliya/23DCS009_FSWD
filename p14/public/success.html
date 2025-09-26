@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Successful</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            min-height: 100vh;
+        }
+        .container {
+            max-wcdidth: 400px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+            padding: 36px 28px 28px 28px;
+            text-align: center;
+            position: relative;
+        }
+
+        .checkmark {
+            font-size: 3.5em;
+            color: #27ae60;
+            margin-bottom: 18px;
+            animation: pop 0.5s ease;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            80% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        h2 {
+            color: #2a6edb;
+            margin-bottom: 18px;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+
+        .desc {
+            color: #555;
+            font-size: 1.08em;
+            margin-bottom: 22px;
+        }
+
+        .back-btn {
+            background: linear-gradient(90deg, #2a6edb 0%, #6dd5ed 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 32px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(90deg, #1a4e9b 0%, #2a6edb 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="checkmark"><i class="fa-solid fa-circle-check"></i></div>
+        <h2>Resume Uploaded Successfully!</h2>
+        <div class="desc">Thank you for submitting your resume.<br>Your file has been received and is under review.
+        </div>
+        <a href="/" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Portal</a>
+    </div>
+</body>
+
+</html>

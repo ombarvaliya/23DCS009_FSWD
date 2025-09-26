@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kid Calculator</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Kid Calculator <span aria-label="abacus" role="img"></span>🧮</span></h1>
+        <p style="color:#ffb347; font-size:1.1em; margin-bottom:18px;">Let's have fun with numbers!</p>
+        <form action="/calculate" method="POST" autocomplete="off" style="margin-bottom: 18px;">
+            <div style="display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;">
+                <input type="text" name="num1" placeholder="First number" required aria-label="First number">
+                <select name="operation" id="operation" aria-label="Operation">
+                    <option value="add">+</option>
+                    <option value="subtract">-</option>
+                    <option value="multiply">×</option>
+                    <option value="divide">÷</option>
+                </select>
+                <input type="text" name="num2" placeholder="Second number" required aria-label="Second number">
+            </div>
+            <button type="submit" style="margin-top:18px;">Calculate</button>
+        </form>
+        <% if (result !==null) { %>
+            <div class="result">🎉 Result: <strong>
+                    <%= result %>
+                </strong></div>
+            <% } %>
+                <% if (error) { %>
+                    <div class="error">⚠️ <%= error %>
+                    </div>
+                    <% } %>
+                        <div style="margin-top:30px; color:#888; font-size:0.95em;">
+                            <span>Tip: Only numbers are allowed. Have fun calculating!</span>
+                        </div>
+    </div>
+</body>
+
+</html>

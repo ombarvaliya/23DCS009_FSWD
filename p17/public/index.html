@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Tuition Class</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Admin Panel - Tuition Class</h1>
+        <form id="studentForm">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="phone" placeholder="Phone" required>
+            <input type="text" id="batch" placeholder="Batch" required>
+            <button type="submit">Add Student</button>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Batch</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="studentsTable"></tbody>
+        </table>
+    </div>
+    <script>
+        async function fetchStudents() {
+            const res = await fetch('/api/students');
+            const students = await res.json();
+            const tbody = document.getElementById('studentsTable');
+            tbody.innerHTML = '';
+            students.forEach(s => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+          <td>${s.name}</td>
+          <td>${s.email}</td>
+          <td>${s.phone}</td>
+          <td>${s.batch}</td>
+          <td class="actions">
+            <button onclick="editStudent('${s._id}', this)">Edit</button>
+            <button onclick="deleteStudent('${s._id}')">Delete</button>
+          </td>
+        `;
+                tbody.appendChild(tr);
+            });
+        }
+        fetchStudents();
+
+        document.getElementById('studentForm').onsubmit = async e => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const batch = document.getElementById('batch').value.trim();
+            if (!name || !email || !phone || !batch) return;
+            await fetch('/api/students', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, phone, batch })
+            });
+            e.target.reset();
+            fetchStudents();
+        };
+
+        window.deleteStudent = async id => {
+            if (!confirm('Delete this student?')) return;
+            await fetch(`/api/students/${id}`, { method: 'DELETE' });
+            fetchStudents();
+        };
+
+        window.editStudent = (id, btn) => {
+            const tr = btn.closest('tr');
+            const tds = tr.querySelectorAll('td');
+            const [name, email, phone, batch] = Array.from(tds).slice(0, 4).map(td => td.textContent);
+            tr.classList.add('edit-row');
+            tr.innerHTML = `
+        <td><input value="${name}"></td>
+        <td><input value="${email}"></td>
+        <td><input value="${phone}"></td>
+        <td><input value="${batch}"></td>
+        <td class="actions">
+          <button onclick="saveEdit('${id}', this)">Save</button>
+          <button onclick="fetchStudents()">Cancel</button>
+        </td>
+      `;
+        };
+
+        window.saveEdit = async (id, btn) => {
+            const tr = btn.closest('tr');
+            const inputs = tr.querySelectorAll('input');
+            const [name, email, phone, batch] = Array.from(inputs).map(i => i.value.trim());
+            if (!name || !email || !phone || !batch) return;
+            await fetch(`/api/students/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, phone, batch })
+            });
+            fetchStudents();
+        };
+    </script>
+</body>
+
+</html>
